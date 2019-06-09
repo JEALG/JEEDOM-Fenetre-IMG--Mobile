@@ -1,0 +1,55 @@
+<div style="min-width:40px;height:100%;vertical-align: top;" class="cmd" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
+    <!-- Info Widget
+            Basé sur les widget de 		: Plusieurs Widget
+            Mise à jour 				: JAG 20190909 : Partage du widget	
+    -->
+    <span style="font-size:12px;#hideCmdName#">#name_display#</span>
+	<div class="iconCmd#uid#"></div>
+    <span class="timeCmd#id# label value" style="font-weight: bold;font-size : 10px;"></span>
+    <script> 
+        jeedom.cmd.update['#id#'] = function(_options){
+            // Paramètrage du logo
+                // Valeur pour ON ou 1
+                    var srcImglogoON_M      = ('#logoClose-M#'!='#'+'logoClose-M#') ? "#logoClose-M#" 	: "BaieClose";
+                    var srcImglogoON_M_T    = ('#logoClose_type-M#'!='#'+'logoClose_type-M#') ? "#logoClose_type-M#" : "png";
+                // Valeur pour OFF ou 0
+                    var srcImglogoOFF_M     = ('#logoOpen-M#'!='#'+'logoOpen-M#') ? "#logoOpen#" 	: "BaieOpen";
+                    var srcImglogoOFF_M_T   = ('#logoOpen_type-M#'!='#'+'logoOpen_type-M#') ? "#logoOpen_type-M#" : "png";
+                // Paramètrage du logo pour Erreur
+                    var srcImglogoER_M      = ('#logoER-M#'!='#'+'logoER-M#') ? "#logoER-M#": "oups";
+                    var srcImglogoER_M_T    = ('#logoER_type-M#'!='#'+'logoER_type-M#') ? "#logoER_type-M#": "png";
+            // Paramètre "sizeh" & "sizew"
+                    var srcImgHeight_M      = is_numeric('#sizeh-M#') ? parseFloat('#sizeh-M#'):40;
+                    var srcImgWidth_M       = is_numeric('#sizew-M#') ? parseFloat('#sizew-M#'):40;
+                    var srcImgSize_M        = 'height='+srcImgHeight_M+'px width='+srcImgWidth_M+'px';
+            // Paramétrage des images
+                    var srcImgURL_M         = 'plugins/widget/core/template/mobile/cmd.info.binary.Fenetre-IMG/';
+            // Affichage durée changement dernier etat
+                    var srcImglogoTime_M    = '#logoTime-M#';
+            //Update
+                if (_options.display_value == '1') {
+                    $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoON_M +'.'+ srcImglogoON_M_T+'" '+srcImgSize_M+'>');
+                }else if (_options.display_value == '0') {
+                    $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoOFF_M +'.'+ srcImglogoOFF_M_T+'" '+srcImgSize_M+'>');
+                }else {
+                    $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoER_M +'.'+ srcImglogoER_M_T+'" '+srcImgSize_M+'>');
+                }
+            // Derniere durée changement dernier etat -- Merci @Salvialf pour le code
+                if (srcImglogoTime_M == 'duree') {
+                    jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+                } else if (srcImglogoTime_M == 'date') {
+                    var week            = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+                    var date            = new Date(_options.valueDate.replace(' ', 'T'));
+                    var t               = _options.valueDate.split(/[- :]/);
+                    var format          = week[date.getDay()]+" "+t[2]+"/"+t[1];
+                    var time            = "à "+t[3]+":"+t[4];
+                    $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(format+'<br>'+time);
+                } else if (srcImglogoTime_M == 'heure') {
+                    var t               = _options.valueDate.split(/[- :]/);
+                    var time            = "à "+t[3]+":"+t[4]+":"+t[5];
+                    $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(time);
+                }
+        }
+        jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#'});
+</script>
+</div>
