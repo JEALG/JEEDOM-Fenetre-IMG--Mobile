@@ -1,7 +1,7 @@
 <div style="min-width:40px;height:100%;vertical-align: top;" class="cmd" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
     <!-- Info Widget
             Basé sur les widget de 		: Plusieurs Widget
-            Mise à jour 				: JAG 20190806 : Correction Bug URL image + modif duree	
+            Mise à jour 				: JAG 20190907 : Normalisation nom images => Merci à mich0111
     -->
     <span style="font-size:12px;#hideCmdName#">#name_display#</span>
 	<div class="iconCmd#uid#"></div>
@@ -10,10 +10,10 @@
     jeedom.cmd.update['#id#'] = function(_options){
         // Paramètrage du logo
             // Valeur pour ON ou 1
-                var srcImglogoON_M      = ('#logoClose-M#'!='#'+'logoClose-M#') ? "#logoClose-M#" 	: "BaieClose";
+                var srcImglogoON_M      = ('#logoClose-M#'!='#'+'logoClose-M#') ? "#logoClose-M#" 	: "ou_baie2_wh_db_off";
                 var srcImglogoON_M_T    = ('#logoClose_type-M#'!='#'+'logoClose_type-M#') ? "#logoClose_type-M#" : "png";
             // Valeur pour OFF ou 0
-                var srcImglogoOFF_M     = ('#logoOpen-M#'!='#'+'logoOpen-M#') ? "#logoOpen#" 	: "BaieOpen";
+                var srcImglogoOFF_M     = ('#logoOpen-M#'!='#'+'logoOpen-M#') ? "#logoOpen#" 	: "ou_baie2_wh_rg_on";
                 var srcImglogoOFF_M_T   = ('#logoOpen_type-M#'!='#'+'logoOpen_type-M#') ? "#logoOpen_type-M#" : "png";
             // Paramètrage du logo pour Erreur
                 var srcImglogoER_M      = ('#logoER-M#'!='#'+'logoER-M#') ? "#logoER-M#": "oups";
